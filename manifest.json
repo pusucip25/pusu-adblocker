@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "Pusu AdBlocker",
+  "version": "1.5.0",
+  "description": "Ad blocker — zero tracking. v1.5: buton Block in popup + reguli dinamice (fara tab closing agresiv)",
+  "author": "Pusu",
+  "homepage_url": "https://github.com/pusu/adblocker",
+  "permissions": [
+    "declarativeNetRequest",
+    "storage",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "Pusu AdBlocker"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "rules_ads",
+        "enabled": true,
+        "path": "rules/ads.json"
+      },
+      {
+        "id": "rules_trackers",
+        "enabled": true,
+        "path": "rules/trackers.json"
+      },
+      {
+        "id": "rules_annoyances",
+        "enabled": true,
+        "path": "rules/annoyances.json"
+      },
+      {
+        "id": "rules_custom",
+        "enabled": true,
+        "path": "rules/custom.json"
+      }
+    ]
+  }
+}
