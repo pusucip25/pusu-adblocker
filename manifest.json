@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Pusu AdBlocker",
-  "version": "1.5.0",
-  "description": "Ad blocker — zero tracking. v1.5: buton Block in popup + reguli dinamice (fara tab closing agresiv)",
+  "version": "1.6.0",
+  "description": "Ad blocker. v1.6: +StevenBlack hosts DNR rules",
   "author": "Pusu",
-  "homepage_url": "https://github.com/pusu/adblocker",
+  "homepage_url": "https://github.com/pusucip25/pusu-adblocker",
   "permissions": [
     "declarativeNetRequest",
     "storage",
@@ -16,8 +16,12 @@
   ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_start",
       "all_frames": true
     }
@@ -60,6 +64,11 @@
         "id": "rules_custom",
         "enabled": true,
         "path": "rules/custom.json"
+      },
+      {
+        "id": "rules_sbhosts",
+        "enabled": true,
+        "path": "rules/sbhosts.json"
       }
     ]
   }

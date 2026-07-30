@@ -40,7 +40,7 @@ După ore de:
 
 1. **Clone** acest repo:
    ```bash
-   git clone https://github.com/pusu/pusu-adblocker.git
+   git clone https://github.com/pusucip25/pusu-adblocker.git
    ```
 
 2. Intră în **Chrome** → `chrome://extensions`
