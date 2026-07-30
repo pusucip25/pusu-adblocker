@@ -145,4 +145,14 @@ MIT — fă ce vrei cu el, doar dă credit.
 
 ---
 
+## 🔗 More from Pusu
+
+| Project | Description |
+|---|---|
+| [🔌 USB-AI-Agent](https://github.com/pusucip25/USB-AI-Agent) | Portable AI agent from USB — 13 tools, OSINT, offline |
+| [🌐 AI-Flight-Search](https://github.com/pusucip25/AI-Flight-Search) | AI-powered flight search engine |
+| [💡 ZENO](https://github.com/pusucip25/ZENO) | AI project — details coming soon |
+
+---
+
 **Făcut cu ❤️ (și multă cafea) de Pusu & Hermes Agent, 2026**
