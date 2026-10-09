@@ -10,6 +10,8 @@
 
 Creat de [Pusu](https://github.com/pusucip25) împreună cu Hermes Agent — după o noapte întreagă de încercări, bug-uri reparate pe loc și blesteme la adresa scripturilor de popup. 🍻
 
+![Pusu AdBlocker — popup-ul extensiei](screenshot.png)
+
 ---
 
 ## 🎯 De ce Pusu AdBlocker?
