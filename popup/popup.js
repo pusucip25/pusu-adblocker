@@ -1,4 +1,4 @@
-// Pusu AdBlocker — Popup Script v1.5
+// Pusu AdBlocker — Popup Script v1.7
 // Cu buton "Blochează site-ul asta"
 
 let currentDomain = '';

@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
   "name": "Pusu AdBlocker",
-  "version": "1.6.0",
-  "description": "Ad blocker. v1.6: +StevenBlack hosts DNR rules",
+  "version": "1.7.0",
+  "description": "Ad blocker. v1.7: live block counter + StevenBlack hosts DNR rules",
   "author": "Pusu",
   "homepage_url": "https://github.com/pusucip25/pusu-adblocker",
   "permissions": [
     "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
     "storage",
     "scripting",
     "tabs"

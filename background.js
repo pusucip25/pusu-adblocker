@@ -1,7 +1,42 @@
-// Pusu AdBlocker — Background Service Worker v1.5
+// Pusu AdBlocker — Background Service Worker v1.7
 // Popup-ul poate adăuga domenii la blocklist dinamic
 
 const RULESET_IDS = ['rules_ads', 'rules_trackers', 'rules_annoyances', 'rules_custom'];
+
+// --- Live block counter ---
+// totalBlocked was only ever initialised to 0 and reset to 0, so the popup's
+// "TOTAL BLOCATE" stat could never leave zero. onRuleMatchedDebug fires once
+// per blocked request; it needs the declarativeNetRequestFeedback permission
+// and only fires for unpacked extensions, which is exactly how the README
+// tells people to install this. Increments are batched and flushed to storage
+// so a busy page does not cause one storage write per blocked request.
+let pendingBlocked = 0;
+let flushTimer = null;
+
+function flushBlockedCount() {
+    if (flushTimer) return;
+    flushTimer = setTimeout(async () => {
+        flushTimer = null;
+        const increment = pendingBlocked;
+        pendingBlocked = 0;
+        if (!increment) return;
+        const stored = await chrome.storage.local.get('totalBlocked');
+        await chrome.storage.local.set({
+            totalBlocked: (stored.totalBlocked || 0) + increment
+        });
+        // nudge an open popup to refresh
+        chrome.runtime.sendMessage({ type: 'statsUpdated' }).catch(() => {});
+    }, 400);
+}
+
+if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
+    chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(() => {
+        pendingBlocked++;
+        flushBlockedCount();
+    });
+} else {
+    console.warn('🛡️ Counter indisponibil: extensia trebuie încărcată unpacked.');
+}
 
 // --- Dynamic rule management ---
 async function blockDomain(domain) {
@@ -94,7 +129,7 @@ async function init() {
         await chrome.declarativeNetRequest.updateDynamicRules({ addRules: rules }).catch(() => {});
     }
     
-    console.log(`🛡️ Pusu AdBlocker v1.5 — ${dynamicBlocked.length} domenii blocate dinamic`);
+    console.log(`🛡️ Pusu AdBlocker v1.7 — ${dynamicBlocked.length} domenii blocate dinamic`);
 }
 
 // --- Message handler ---
@@ -137,9 +172,12 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 // --- La install ---
 chrome.runtime.onInstalled.addListener(async (details) => {
-    if (details.reason === 'install' || details.reason === 'update') {
+    if (details.reason === 'install') {
         await chrome.storage.local.set({ totalBlocked: 0, enabled: true });
-        console.log('🛡️ Pusu AdBlocker instalat/actualizat.');
+        console.log('🛡️ Pusu AdBlocker instalat.');
+    } else if (details.reason === 'update') {
+        // statisticile acumulate nu se mai resetează la fiecare actualizare
+        console.log('🛡️ Pusu AdBlocker actualizat — statisticile păstrate.');
     }
 });
 

@@ -1,6 +1,6 @@
 # 🛡️ Pusu AdBlocker
 
-[![Version](https://img.shields.io/badge/version-1.6.0-red)](https://github.com/pusucip25/pusu-adblocker)
+[![Version](https://img.shields.io/badge/version-1.7.0-red)](https://github.com/pusucip25/pusu-adblocker)
 [![Manifest](https://img.shields.io/badge/manifest-v3-blue)](https://developer.chrome.com/docs/extensions/mv3/)
 [![Rules](https://img.shields.io/badge/rules-35,000%2B-brightgreen)](#-features)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -55,6 +55,8 @@ După ore de debugging:
 - ✅ ...și multe iterații mai târziu
 
 **v1.6** — 35,000+ reguli, StevenBlack hosts integrat, anti-popup 5-straturi.
+
+**v1.7** — contorul de blocări chiar numără: `onRuleMatchedDebug` incrementează `totalBlocked`, iar statisticile nu se mai resetează la fiecare actualizare.
 
 ---
 
